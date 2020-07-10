@@ -21,4 +21,8 @@ c.DockerSpawner.image = 'jupyter/base-notebook'
 c.DockerSpawner.network_name = 'jupyterhub'
 
 # delete containers when the stop
-c.DockerSpawner.remove = True
+c.DockerSpawner.remove = False
+
+c.JupyterHub.ssl_cert = '/srv/jupyterhub/ssl/jhubssl.crt'
+
+c.JupyterHub.ssl_key = '/srv/jupyterhub/ssl/jhubssl.key'

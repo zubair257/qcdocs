@@ -24,3 +24,5 @@ RUN apt-get install -y curl grep sed dpkg && \
     rm tini.deb && \
     apt-get clean
 COPY jupyterhub_config.py /srv/jupyterhub/jupyterhub_config.py
+
+COPY ssl /srv/jupyterhub/ssl
