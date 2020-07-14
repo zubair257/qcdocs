@@ -135,24 +135,24 @@ RUN mkdir -p /srv/data/my_shared_data_folder && \
         apt-get -y install g++ && \
         apt-get -y install git
 
-RUN conda create --name ENV_A python=3.7 && \
-        conda create --name ENV_B python=3.7 && \
-        conda create --name ENV_C python=3.7 && \
+RUN conda create --name env_iisc python=3.7 && \
+        conda create --name env_qiskit python=3.7 && \
+        conda create --name env_python3.7 python=3.7 && \
         . /opt/conda/etc/profile.d/conda.sh && \
-        conda activate ENV_A && \
+        conda activate env_iisc && \
         cd /srv/jupyterhub/git && \
         git clone https://github.com/indian-institute-of-science-qc/qiskit-aakash.git && \
         cd qiskit-aakash && \
         pip install -e . && \
         pip install ipykernel && \
-        conda activate ENV_B && \
+        conda activate env_qiskit && \
         pip install qiskit && \
         pip install ipykernel && \
-        conda activate ENV_C && \
+        conda activate env_python3.7 && \
         pip install ipykernel && \
-        /opt/conda/envs/ENV_A/bin/python -m ipykernel install --prefix=/usr/local/ --name 'ENV_A' && \
-        /opt/conda/envs/ENV_B/bin/python -m ipykernel install --prefix=/usr/local/ --name 'ENV_B' && \
-        /opt/conda/envs/ENV_C/bin/python -m ipykernel install --prefix=/usr/local/ --name 'ENV_C'
+        /opt/conda/envs/env_iisc/bin/python -m ipykernel install --prefix=/usr/local/ --name 'env_iisc' && \
+        /opt/conda/envs/env_qiskit/bin/python -m ipykernel install --prefix=/usr/local/ --name 'env_qiskit' && \
+        /opt/conda/envs/env_python3.7/bin/python -m ipykernel install --prefix=/usr/local/ --name 'env_python3.7'
 
 EXPOSE 8888
 
