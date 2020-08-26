@@ -1,8 +1,9 @@
-FROM jupyterhub/jupyterhub:0.9.4
+FROM jupyterhub/jupyterhub
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
 
 COPY requirements.txt /tmp/requirements.txt
+RUN apt-get update && apt-get install -y git
 RUN python3 -m pip install --no-cache -r /tmp/requirements.txt && \
 	git clone https://github.com/jupyterhub/nativeauthenticator.git && \
 	cd nativeauthenticator && \
