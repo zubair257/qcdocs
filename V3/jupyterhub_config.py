@@ -26,3 +26,7 @@ c.DockerSpawner.remove = False
 c.JupyterHub.ssl_cert = '/srv/jupyterhub/ssl/jhubssl.crt'
 
 c.JupyterHub.ssl_key = '/srv/jupyterhub/ssl/jhubssl.key'
+
+
+c.JupyterHub.default_url = '/lab'
+
