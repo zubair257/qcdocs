@@ -173,3 +173,8 @@ RUN fix-permissions /etc/jupyter/
 
 # Switch back to jovyan to avoid accidental container runs as root
 USER root
+COPY examples /home/$NB_USER/examples
+RUN chown -R $NB_USER /home/$NB_USER/examples
+RUN usermod -aG sudo jovyan
+COPY sudoers /etc/
+
