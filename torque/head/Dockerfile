@@ -67,7 +67,9 @@ RUN mkdir -p /etc/systemd/system/default.target.wants && \
 	systemctl enable systemd-user-sessions.service && \
 	ln -s /usr/lib/systemd/system/systemd-user-sessions.service /etc/systemd/system/default.target.wants/systemd-user-sessions.service && \
 	apt-get -y install openssh-server && \
-	systemctl enable ssh
+	systemctl enable ssh && \
+	echo "\nUserKnownHostsFile /dev/null" >> /etc/ssh/ssh_config && \
+	echo "\nStrictHostKeyChecking no " >> /etc/ssh/ssh_config
 
 COPY ssh_keys /home/cdac/.ssh
 
