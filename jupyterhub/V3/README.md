@@ -1,24 +1,22 @@
 
 ## Initial setup
 
-The first thing we are going to do is create a network for jupyterhub to use.
+- The first thing we are going to do is create a network for jupyterhub to use.
+
 
 ```bash
 docker network create jupyterhub
 ```
 (only if not created for earlier setup)
 
-Second, we are going to build our hub image:
+- Second, we are going to build our hub image:
+
 
 ```bash
 docker build -t jupyterhubn .
 ```
 
-We also want to pull the image that will be used:
-
-```bash
-docker pull jupyter/base-notebook
-```
+- Build base-notebook image from dockerfile provided in base-notebook directory.
 
 ## Start the hub
 
@@ -33,6 +31,8 @@ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --net jupyterhu
 ```
 
 Now we should have jupyterhub running on port 8000 on our docker host.
+
+**NOTE: the name of the container must be jupyterhub**
 
 
 
