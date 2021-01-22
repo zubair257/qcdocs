@@ -71,6 +71,8 @@ RUN mkdir -p /etc/systemd/system/default.target.wants && \
 	echo "\nUserKnownHostsFile /dev/null" >> /etc/ssh/ssh_config && \
 	echo "\nStrictHostKeyChecking no " >> /etc/ssh/ssh_config
 
+RUN echo ". /opt/conda/etc/profile.d/conda.sh" >> /home/cdac/.bashrc
+
 COPY ssh_keys /home/cdac/.ssh
 
 

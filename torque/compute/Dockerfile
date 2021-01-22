@@ -4,6 +4,8 @@ ENV container docker
 ENV LC_ALL C
 ENV DEBIAN_FRONTEND noninteractive
 ENV XDG_RUNTIME_DIR /run/user/$(id -u)
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+ENV PATH /opt/conda/bin:$PATH
 
 RUN sed -i 's/# deb/deb/g' /etc/apt/sources.list
 
@@ -55,6 +57,32 @@ RUN mkdir -p /etc/systemd/system/default.target.wants && \
 	echo "\nUserKnownHostsFile /dev/null" >> /etc/ssh/ssh_config && \
 	echo "\nStrictHostKeyChecking no " >> /etc/ssh/ssh_config
 
+RUN apt-get update --fix-missing && \
+    apt-get install -y wget bzip2 ca-certificates libglib2.0-0 libxext6 libsm6 libxrender1 git mercurial subversion && \
+    apt-get clean
+
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda2-4.7.12-Linux-x86_64.sh -O ~/miniconda.sh && \
+    /bin/bash ~/miniconda.sh -b -p /opt/conda && \
+    rm ~/miniconda.sh && \
+    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
+    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
+    echo "conda activate base" >> ~/.bashrc && \
+    find /opt/conda/ -follow -type f -name '*.a' -delete && \
+    find /opt/conda/ -follow -type f -name '*.js.map' -delete && \
+    /opt/conda/bin/conda clean -afy
+
+RUN conda create --name env_iisc python=3.7 && \
+	conda create --name env_qiskit python=3.7 && \
+	conda create --name env_python3.7 python=3.7 && \
+	. /opt/conda/etc/profile.d/conda.sh && \
+	conda activate env_iisc && \
+	mkdir -p  /srv/jupyterhub/git && \
+	cd /srv/jupyterhub/git && \
+	git clone https://github.com/indian-institute-of-science-qc/qiskit-aakash.git && \
+	cd qiskit-aakash && \
+	pip install -e . && \
+	conda activate env_qiskit && \
+	pip install qiskit
 
 
 
