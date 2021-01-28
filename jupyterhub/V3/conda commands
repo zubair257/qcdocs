@@ -1,0 +1,34 @@
+
+***IPYTHON KERNELS**
+
+list ipython kernels
+jupyter kernelspec list
+
+make ipython kernel
+/opt/anaconda3/envs/test3.7/bin/python -m ipykernel install --prefix=/usr/local/ --name 'test2'
+
+remove a kernel
+jupyter kernelspec remove <kernel-name>
+
+
+
+
+
+**CONDA COMMANDS**
+
+create conda environment
+conda create --name <name_of_env> python=3.7
+
+list all conda environments
+conda info --envs
+
+remove conda environment
+conda env remove -n <name_of_env>
+
+
+**Qiskit
+
+
+qiskit.__qiskit_version__
+
+
