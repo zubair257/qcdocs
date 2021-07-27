@@ -56,6 +56,7 @@ RUN echo head > /var/spool/torque/server_name
 
 
 RUN cd 6.0.1 && \
+	echo "127.0.0.1      head" >> /etc/hosts && \
 	yes | ./torque.setup root
 
 
@@ -74,6 +75,8 @@ RUN mkdir -p /etc/systemd/system/default.target.wants && \
 RUN echo ". /opt/conda/etc/profile.d/conda.sh" >> /home/cdac/.bashrc
 
 COPY ssh_keys /home/cdac/.ssh
+
+RUN chown -R cdac:cdac /home/cdac/.ssh
 
 
 ENTRYPOINT ["/lib/systemd/systemd"]
